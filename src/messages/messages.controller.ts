@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
+import { CreateMessageDto } from './dtos';
 
 @Controller('messages')
 export class MessagesController {
@@ -8,12 +16,12 @@ export class MessagesController {
   }
 
   @Post()
-  createMessage(@Body() body: any) {
+  createMessage(@Body() body: CreateMessageDto) {
     return 'Message created. Body: ' + JSON.stringify(body);
   }
 
   @Get('/:id')
-  getMessage(@Param('id') id: number) {
+  getMessage(@Param('id', ParseIntPipe) id: number) {
     return `Message ${id}`;
   }
 }
