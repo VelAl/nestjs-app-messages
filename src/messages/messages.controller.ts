@@ -2,26 +2,38 @@ import {
   Body,
   Controller,
   Get,
+  NotFoundException,
   Param,
-  ParseIntPipe,
+  ParseUUIDPipe,
   Post,
 } from '@nestjs/common';
+
 import { CreateMessageDto } from './dtos';
+
+import { MessagesService } from './messages.service';
 
 @Controller('messages')
 export class MessagesController {
+  constructor(public messagesService: MessagesService) {}
+
   @Get()
   listMessages() {
-    return 'List of messages';
+    return this.messagesService.getMessages();
   }
 
   @Post()
   createMessage(@Body() body: CreateMessageDto) {
-    return 'Message created. Body: ' + JSON.stringify(body);
+    return this.messagesService.createMessage(body.content);
   }
 
   @Get('/:id')
-  getMessage(@Param('id', ParseIntPipe) id: number) {
-    return `Message ${id}`;
+  async getMessage(@Param('id', ParseUUIDPipe) id: string) {
+    const meessage = await this.messagesService.getMessage(id);
+
+    if (!meessage) {
+      throw new NotFoundException(`Messge with id ${id} not found.`);
+    }
+
+    return meessage;
   }
 }
