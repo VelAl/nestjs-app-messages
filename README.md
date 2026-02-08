@@ -4,6 +4,8 @@
 
 # nestjs-app-messages
 
-Educational project for learning NestJS from a Udemy course:
+A simple NestJS backend: CRUD operations for messages. Data is stored in a JSON file.
 
-**[NestJS: The Complete Developer's Guide](https://www.udemy.com/course/nestjs-the-complete-developers-guide/)**
+**Goal** — to understand the basic structure of NestJS (modules, controllers, services, repositories).
+
+Course: **[NestJS: The Complete Developer's Guide](https://www.udemy.com/course/nestjs-the-complete-developers-guide/)**
