@@ -17,4 +17,8 @@ export class MessagesService {
   createMessage(message: string) {
     return this.messagesRepo.createMessage(message);
   }
+
+  removeMessage(id: string) {
+    return this.messagesRepo.removeMessage(id);
+  }
 }

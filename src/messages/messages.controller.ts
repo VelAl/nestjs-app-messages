@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   NotFoundException,
   Param,
@@ -35,5 +36,14 @@ export class MessagesController {
     }
 
     return meessage;
+  }
+
+  @Delete('/:id')
+  async deleteMessage(@Param('id', ParseUUIDPipe) id: string) {
+    const removed = await this.messagesService.removeMessage(id);
+
+    if (!removed) {
+      throw new NotFoundException(`Message with id ${id} not found.`);
+    }
   }
 }
